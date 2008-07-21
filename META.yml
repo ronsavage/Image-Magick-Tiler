@@ -1,0 +1,17 @@
+--- #YAML:1.0
+name: Image-Magick-Tiler
+version: 1.00
+author:
+  - Ron Savage <ron@savage.net.au>
+abstract: Slice an image into N x M tiles.
+license: artistic
+requires:
+  Image::Magick: 6
+build_requires:
+  Test::More: 0
+  Test::Pod: 0
+provides:
+  Image::Magick::Tiler:
+    file: lib/Image/Magick/Tiler.pm
+    version: 1.00
+generated_by: Module::Build version 0.2607

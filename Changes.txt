@@ -1,0 +1,4 @@
+Revision history for Perl extension Image::Magick::Tiler.
+
+1.00  Thu Feb 22 20:37:29 2005
+	- original version
