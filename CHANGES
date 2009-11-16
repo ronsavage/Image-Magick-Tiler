@@ -1,0 +1,8 @@
+Revision history for Perl extension Image::Magick::Tiler.
+
+1.01  Fri Nov 13 13:20:00 2009
+	- Run dos2unix
+	- Rename Changes.txt to CHANGES
+
+1.00  Thu Feb 22 20:37:29 2005
+	- original version
