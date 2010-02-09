@@ -1,0 +1,20 @@
+---
+abstract: 'Slice an image into N x M tiles.'
+author:
+  - 'Ron Savage <ron@savage.net.au>'
+build_requires:
+  Test::More: 0
+  Test::Pod: 0
+configure_requires:
+  Module::Build: 0.36
+dynamic_config: 0
+generated_by: 'Module::Build version 0.3603'
+license: artistic
+name: Image-Magick-Tiler
+provides:
+  Image::Magick::Tiler:
+    file: lib/Image/Magick/Tiler.pm
+    version: 1.00
+requires:
+  Image::Magick: 6
+version: 1.00
