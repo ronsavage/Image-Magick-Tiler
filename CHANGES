@@ -1,5 +1,11 @@
 Revision history for Perl extension Image::Magick::Tiler.
 
+1.03  Sun Feb 21 12:55:25 2010
+	- Remove text 'All rights reserved' (for Debian licensing).
+	- Remove POD heads 'Required Modules' and 'Changes'.
+	- Replace personal doc root with /var/www.
+	- Use namespace::autoclean with Moose.
+
 1.02  Wed Feb 10 14:02:09 2010
 	- MANIFEST.SKIP updated to exclude MYMETA.yml. Add MYMETA.yml.
 
