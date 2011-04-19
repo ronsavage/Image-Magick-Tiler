@@ -243,7 +243,7 @@ __END__
 
 =head1 NAME
 
-C<Image::Magick::Tiler> - Slice an image into N x M tiles.
+C<Image::Magick::Tiler> - Slice an image into N x M tiles
 
 =head1 Synopsis
 
