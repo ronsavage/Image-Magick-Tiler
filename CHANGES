@@ -1,6 +1,6 @@
 Revision history for Perl extension Image::Magick::Tiler.
 
-1.04  Tue Feb 15 16:57:00 2011
+1.04  Unreleased
 	- Replace /usr/bin/perl with /usr/bin/env perl.
 	- Replace common::sense with use strict and use warnings, to get uninit var warnings.
 
