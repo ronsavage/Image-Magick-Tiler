@@ -32,31 +32,11 @@ use strict;
 use warnings;
 
 use Carp;
+
 use File::Spec;
+
 use Image::Magick;
 
-require 5.005_62;
-
-require Exporter;
-
-our @ISA = qw(Exporter);
-
-# Items to export into callers namespace by default. Note: do not export
-# names by default without a very good reason. Use EXPORT_OK instead.
-# Do not simply export all your public functions/methods/constants.
-
-# This allows declaration	use Image::Magick::Tiler ':all';
-# If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
-# will save memory.
-our %EXPORT_TAGS = ( 'all' => [ qw(
-
-) ] );
-
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
-
-our @EXPORT = qw(
-
-);
 our $VERSION = '1.03';
 
 # -----------------------------------------------
@@ -344,7 +324,7 @@ The default value is 1.
 
 Setting it to 0 causes C<sub tile()> to return an empty array ref.
 
-Presumably you've set option 'write' to 1 to write the tiles to disk in this case.
+Presumably you have set option 'write' to 1 to write the tiles to disk in this case.
 
 Setting return to 1 causes C<sub tile()> to return an array ref of elements.
 
@@ -399,18 +379,28 @@ See above, in the section called 'Constructor and initialization'.
 
 Returns an array ref, which may be empty. See the 'return' option above for details.
 
+=head1 Repository
+
+L<https://github.com/ronsavage/Image-Magick-Tiler>
+
+=head1 Support
+
+Email the author, or log a bug on RT:
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Image::Magick::Tiler>.
+
 =head1 Author
 
 C<Image::Magick::Tiler> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2005.
 
-Home page: http://savage.net.au/index.html
+L<Homepage|http://savage.net.au/>
 
 =head1 Copyright
 
 Australian copyright (c) 2005, Ron Savage.
 	All Programs of mine are 'OSI Certified Open Source Software';
 	you can redistribute them and/or modify them under the terms of
-	The Artistic License, a copy of which is available at:
+	The Perl License, a copy of which is available at:
 	http://www.opensource.org/licenses/index.html
 
 =cut

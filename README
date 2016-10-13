@@ -1,6 +1,6 @@
 README file for Image::Magick::Tiler.
 
-See also: Changes.txt.
+See also: CHANGES and Changelog.ini.
 
 Warning: WinZip 8.1 and 9.0 both contain an 'accidental' bug which stops
 them recognizing POSIX-style directory structures in valid tar files.
@@ -39,16 +39,7 @@ shell>exit            (for Unix-like systems)
 
 On all systems:
 
-Run Tiler.pm through you favourite pod2html translator.
-
-If you are using my fancy-pom2.pl, with its 'default.css' file installed in
-/apache2/htdocs/css/, you'd do:
-
-shell>perl fancy-pom2.pl html -css Tiler.pm > /apache2/htdocs/Tiler.html
-
-or perhaps something like:
-
-shell>perl fancy-pom2.pl html -css Tiler.pm > /perl/html/site/lib/Image/Magick/Tiler.html
+Run Marpa.pm through your favourite pod2html translator.
 
 2 Installing from an ActiveState distro
 ---------------------------------------

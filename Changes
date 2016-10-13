@@ -1,8 +1,13 @@
 Revision history for Perl extension Image::Magick::Tiler.
 
-1.04  Unreleased
+1.04  2016-10-13T13:43:00
 	- Replace /usr/bin/perl with /usr/bin/env perl.
 	- Replace common::sense with use strict and use warnings, to get uninit var warnings.
+	- Adopt new repo format. This means many small changes.
+		See http://savage.net.au/Ron/html/My.Workflow.for.Building.Distros.html for notes on the
+		modernization of Makefile.PL.
+	- Add github repo.
+	- Remove Build.PL. See RT#105576. Thanx Karen Etheridge.
 
 1.03  Sun Feb 21 12:55:25 2010
 	- Remove text 'All rights reserved' (for Debian licensing).

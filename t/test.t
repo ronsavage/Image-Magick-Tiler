@@ -1,9 +1,13 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
 use File::Basename;
-use Test::More tests => 7;
+
+use Test::More;
 
 # ------------------------
-
-BEGIN{ use_ok('Image::Magick::Tiler'); }
 
 my($result) = Image::Magick::Tiler -> new
 (
@@ -30,3 +34,5 @@ isa_ok($$ara[0]{'image'}, 'Image::Magick', 'tile() returned an Image::Magick ima
 my($name, $path, $suffix) = fileparse($$ara[0]{'file_name'});
 
 is($name, '1-1.png', 'tile() returned a file name');
+
+done_testing;
