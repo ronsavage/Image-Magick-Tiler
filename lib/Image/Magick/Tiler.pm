@@ -37,7 +37,7 @@ use File::Spec;
 
 use Image::Magick;
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 # -----------------------------------------------
 
