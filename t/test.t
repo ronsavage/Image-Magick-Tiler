@@ -23,7 +23,6 @@ my($result) = Image::Magick::Tiler -> new
 	geometry	=> '2x2+6+0',
 	output_dir	=> $temp_dir,
 	output_type	=> 'png',
-	return		=> 1,
 	verbose		=> 1,
 	write		=> 0,
 );

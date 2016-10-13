@@ -83,9 +83,10 @@ sub BUILD
 {
 	my($self) = @_;
 
-	die "Error. You must call new as new(input_file => 'path/to/x.suffix'). \n" if (! $self -> input_file);
+	die "Error. You must call new as new(input_file => 'path/to/x.suffix')\n" if (! $self -> input_file);
 
-	my($g) = $self -> geometry;
+	my($g)	= $self -> geometry;
+	$g		= ($g =~ /^\d+x\d+$/) ? "$g+0+0" : $g;
 
 	my(@g);
 
@@ -98,14 +99,14 @@ sub BUILD
 
 		if ($self -> verbose)
 		{
-			print "Image::Magick:        V @{[$Image::Magick::VERSION || 'undef']}. \n";
-			print "Image::Magick::Tiler: V $Image::Magick::Tiler::VERSION. \n";
-			print "Geometry:             $g parsed as NxM+x+y = " . $self -> geometry . ". \n";
+			print "Image::Magick:        V @{[$Image::Magick::VERSION || 'undef']}\n";
+			print "Image::Magick::Tiler: V $Image::Magick::Tiler::VERSION\n";
+			print "Geometry:             $g parsed as NxM+x+y = " . $self -> geometry . "\n";
 		}
 	}
 	else
 	{
-		die "Error. Input (NxM+x+y = $g) is not in the correct format. \n";
+		die "Error. Geometry (NxM+x+y = $g) is not in the correct format. \n";
 	}
 
 }	# End of BUILD.
@@ -118,7 +119,7 @@ sub tile
 	my($image)	= Image::Magick -> new();
 	my($result)	= $image -> Read($self -> input_file);
 
-	die "Error. Unable to read file $self -> input_file. Image::Magick error: $result. \n" if ($result);
+	die "Error. Unable to read file $self -> input_file. Image::Magick error: $result\n" if ($result);
 
 	my(@g)											= @{$self -> geometry_set};
 	my($param)										= {};
@@ -130,9 +131,9 @@ sub tile
 
 	if ($self -> verbose)
 	{
-		print "Image:                $self -> input_file. \n";
-		print "Image size:           ($$param{image}{width}, $$param{image}{height}). \n";
-		print "Tile size:            ($$param{tile}{width}, $$param{tile}{height}) (before applying x and y). \n";
+		print 'Image:                ' . $self -> input_file . "\n";
+		print "Image size:           ($$param{image}{width}, $$param{image}{height})\n";
+		print "Tile size:            ($$param{tile}{width}, $$param{tile}{height}) (before applying x and y)\n";
 	}
 
 	die "Error. Tile width ($$param{tile}{width}) < input x ($g[4]). \n"	if ($$param{tile}{width} < abs($g[4]) );
@@ -143,7 +144,7 @@ sub tile
 
 	if ($self -> verbose)
 	{
-		print "Tile size:            ($$param{tile}{width}, $$param{tile}{height}) (after applying x and y). \n";
+		print "Tile size:            ($$param{tile}{width}, $$param{tile}{height}) (after applying x and y)\n";
 	}
 
 	my($count)	= 0;
@@ -164,11 +165,11 @@ sub tile
 			$output_file_name	= File::Spec -> catfile($self -> output_dir, $output_file_name) if ($self -> output_dir);
 			$tile				= $image -> Clone();
 
-			die "Error. Unable to clone image $output_file_name. \n" if (! ref $tile);
+			die "Error. Unable to clone image $output_file_name\n" if (! ref $tile);
 
 			$result = $tile -> Crop(x => $x, y => $y, width => $$param{tile}{width}, height => $$param{tile}{height});
 
-			die "Error. Unable to crop image $output_file_name. Image::Magick error: $result. \n" if ($result);
+			die "Error. Unable to crop image $output_file_name. Image::Magick error: $result\n" if ($result);
 
 			push @{$output},
 			{
@@ -180,13 +181,21 @@ sub tile
 			{
 				$tile -> Write($output_file_name);
 
-				print 'Wrote tile ' . sprintf('%4d', $count) . "       $output_file_name. \n" if ($self -> verbose);
+				if ($self -> verbose > 1)
+				{
+					print 'Wrote tile ' . sprintf('%4d', $count) . "       $output_file_name\n";
+				}
 			}
 
 			$y += $$param{tile}{height};
 		}
 
 		$x += $$param{tile}{width};
+	}
+
+	if ($self -> verbose)
+	{
+		print "Tile count:           $count\n";
 	}
 
 	$self -> count($count);
@@ -203,7 +212,7 @@ __END__
 
 =head1 NAME
 
-Image::Magick::Tiler - Slice an image into N x M tiles
+Image::Magick::Tiler - Slice an image into NxM tiles
 
 =head1 Synopsis
 
@@ -227,8 +236,7 @@ This program ships as scripts/synopsis.pl:
 		geometry	=> '2x2+6+0',
 		output_dir	=> $temp_dir,
 		output_type	=> 'png',
-		return		=> 1,
-		verbose		=> 1,
+		verbose		=> 2,
 		write		=> 1,
 	);
 
@@ -239,7 +247,7 @@ This program ships as scripts/synopsis.pl:
 
 	for my $i (0 .. $#$tiles)
 	{
-		print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}. \n";
+		print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}\n";
 	}
 
 This slices image.png into 2 tiles horizontally and 2 tiles vertically.
@@ -247,7 +255,8 @@ This slices image.png into 2 tiles horizontally and 2 tiles vertically.
 Further, the width of each tile is ( (width of image.png) / 3) + 5 pixels,
 and the height of each tile is ( (height of image.png) / 4) - 6 pixels.
 
-In the geometry option NxM+x+y, the x and y offsets can be used to change the size of the tiles.
+In the geometry option NxM+x+y, the x and y offsets (positive or negative) can be used to change
+the size of the tiles.
 
 For example, if you specify 2x3, and a vertical line spliting the image goes through an
 interesting part of the image, you could then try 2x3+50, say, to move the vertical line 50 pixels
@@ -293,8 +302,8 @@ M is the default number of tiles in the verical direction.
 
 From V 2.00 on, no items in the geometry are optional.
 
-Negative or positive values can be used for x and y. Negative values will probably cause extra tiles to be
-required to cover the image. That why I used the phrase 'default number of tiles' above.
+Negative or positive values can be used for x and y. Negative values will probably cause extra tiles
+to be required to cover the image. That why I used the phrase 'default number of tiles' above.
 
 An example would be '2x3-10-12'.
 
@@ -312,13 +321,14 @@ This parameter is optional.
 
 Default: 'png'.
 
-=item o verbose => $Boolean
+=item o verbose => $int
 
 This parameter is optional.
 
-It takes the values 0 and 1.
+It takes the values 0, 1 and 2.
 
-Setting it to 1 causes various information to be written to STDOUT.
+If 0, nothing is written. If 1, various statistics are written. If 2, you get stats plus a line
+about every tile written.
 
 Default: 0.
 
@@ -330,7 +340,8 @@ It takes the values 0 and 1.
 
 This value causes tiles to be not written to disk.
 
-Setting it to 1 causes the tiles to be written to disk using the automatically generated files names as above.
+Setting it to 1 causes the tiles to be written to disk using the automatically generated files names
+as above.
 
 Default: 0.
 

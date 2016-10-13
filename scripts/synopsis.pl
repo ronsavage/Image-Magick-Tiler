@@ -16,8 +16,7 @@ my($tiler)		= Image::Magick::Tiler -> new
 	geometry	=> '2x2+6+0',
 	output_dir	=> $temp_dir,
 	output_type	=> 'png',
-	return		=> 1,
-	verbose		=> 1,
+	verbose		=> 2,
 	write		=> 1,
 );
 
@@ -28,5 +27,5 @@ print "Tiles written: $count. \n";
 
 for my $i (0 .. $#$tiles)
 {
-	print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}. \n";
+	print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}\n";
 }

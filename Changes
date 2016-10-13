@@ -2,7 +2,8 @@ Revision history for Perl extension Image::Magick::Tiler.
 
 2.00  2016-10-13T13:43:00
 	- API change.
-		- The geometry parameter now has no optional items.
+		- The geometry parameter NxM+x+y now has no optional tile counts (NxM) but allows the
+			offsets [+-]x[+-]y to be omitted.
 		- The return parameter has been chopped, so tile() always returns an arrayref.
 	- Replace /usr/bin/perl with /usr/bin/env perl.
 	- Replace common::sense with use strict and use warnings, to get uninit var warnings.
@@ -11,8 +12,13 @@ Revision history for Perl extension Image::Magick::Tiler.
 		modernization of Makefile.PL.
 	- Add github repo.
 	- Remove Build.PL. See RT#105576. Thanx Karen Etheridge.
+	- Add scripts/tile.pl for everyday use.
+	- Add scripts/synopsis.pl for demonstation purposes.
 	- In t/test.t, replace hard-coded output dir with File::Temp -> newdir().
 	- Change Carp::croak to die.
+	- Add method count().
+	- Add method geometry_set().
+	- Remove method return().
 
 1.03  Sun Feb 21 12:55:25 2010
 	- Remove text 'All rights reserved' (for Debian licensing).
