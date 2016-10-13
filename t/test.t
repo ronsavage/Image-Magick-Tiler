@@ -5,6 +5,8 @@ use warnings;
 
 use File::Basename;
 
+use Image::Magick::Tiler;
+
 use Test::More;
 
 # ------------------------
