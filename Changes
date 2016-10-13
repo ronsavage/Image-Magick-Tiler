@@ -8,6 +8,7 @@ Revision history for Perl extension Image::Magick::Tiler.
 		modernization of Makefile.PL.
 	- Add github repo.
 	- Remove Build.PL. See RT#105576. Thanx Karen Etheridge.
+	- In t/test.t, replace hard-coded output dir with File::Temp -> newdir().
 
 1.03  Sun Feb 21 12:55:25 2010
 	- Remove text 'All rights reserved' (for Debian licensing).

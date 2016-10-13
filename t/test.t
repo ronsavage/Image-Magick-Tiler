@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use File::Basename;
+use File::Temp;
 
 use Image::Magick::Tiler;
 
@@ -11,11 +12,15 @@ use Test::More;
 
 # ------------------------
 
+# The EXLOCK option is for BSD-based systems.
+
+my($temp_dir) = File::Temp -> newdir('temp.XXXX', CLEANUP => 1, EXLOCK => 0, TMPDIR => 1);
+
 my($result) = Image::Magick::Tiler -> new
 (
 	input_file	=> './t/input/logo.png',
 	geometry	=> '2x2+6',
-	output_dir	=> './t/output', # Dir does not exist.
+	output_dir	=> $temp_dir,
 	output_type	=> 'png',
 	return		=> 1,
 	verbose		=> 1,
