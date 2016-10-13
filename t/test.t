@@ -36,8 +36,6 @@ isnt($ara, undef, 'tile() returned something');
 is($#$ara, 3, 'tile() returned an array ref of 4 elements');
 isa_ok($$ara[0]{'image'}, 'Image::Magick', 'tile() returned an Image::Magick image');
 
-# Under Windows, $path will be t\output\.
-
 my($name, $path, $suffix) = fileparse($$ara[0]{'file_name'});
 
 is($name, '1-1.png', 'tile() returned a file name');
