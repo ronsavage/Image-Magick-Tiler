@@ -118,7 +118,7 @@ sub new
 
 		if ($$self{'_verbose'})
 		{
-			print "Image::Magick:        V $Image::Magick::VERSION. \n";
+			print "Image::Magick:        V @{[$Image::Magick::VERSION || 'undef']}. \n";
 			print "Image::Magick::Tiler: V $Image::Magick::Tiler::VERSION. \n";
 			print "Geometry:             $g parsed as NxM+x+y = " . join('', @{$$self{'_geometry'} }) . ". \n";
 		}
