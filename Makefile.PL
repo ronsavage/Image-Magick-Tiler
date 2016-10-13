@@ -28,6 +28,8 @@ my(%params) =
 		'File::Basename'	=> 0,
 		'File::Spec'		=> 0,
 		'Image::Magick'		=> 6.00,
+		'strict'			=> 0,
+		'warnings'			=> 0,
 	},
 	TEST_REQUIRES =>
 	{
