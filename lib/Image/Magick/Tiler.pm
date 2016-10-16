@@ -229,15 +229,15 @@ This program ships as scripts/synopsis.pl:
 
 	# ------------------------
 
-	my($temp_dir)	= '/tmp';
-	my($tiler)		= Image::Magick::Tiler -> new
+	my($temp_dir) = '/tmp';
+	my($tiler)    = Image::Magick::Tiler -> new
 	(
-		input_file	=> File::Spec -> catdir('t', 'sample.png'),
-		geometry	=> '2x2+6+0',
-		output_dir	=> $temp_dir,
-		output_type	=> 'png',
-		verbose		=> 2,
-		write		=> 1,
+		input_file  => File::Spec -> catdir('t', 'sample.png'),
+		geometry    => '3x4+5-6',
+		output_dir  => $temp_dir,
+		output_type => 'png',
+		verbose     => 2,
+		write       => 1,
 	);
 
 	my($tiles) = $tiler -> tile;
@@ -250,17 +250,19 @@ This program ships as scripts/synopsis.pl:
 		print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}\n";
 	}
 
-This slices image.png into 2 tiles horizontally and 2 tiles vertically.
+This slices image.png into 3 tiles horizontally and 4 tiles vertically.
 
-Further, the width of each tile is ( (width of image.png) / 3) + 5 pixels,
-and the height of each tile is ( (height of image.png) / 4) - 6 pixels.
+Further, the width of each tile is ( (width of sample.png) / 3) + 5 pixels,
+and the height of each tile is ( (height of sample.png) / 4) - 6 pixels.
 
 In the geometry option NxM+x+y, the x and y offsets (positive or negative) can be used to change
 the size of the tiles.
 
 For example, if you specify 2x3, and a vertical line spliting the image goes through an
 interesting part of the image, you could then try 2x3+50, say, to move the vertical line 50 pixels
-to the right. This is what I do when printing database schema generated with GraphViz::DBI.
+to the right. This is what I do when printing database schema generated with L<GraphViz2::DBI>.
+
+Aslo, try running: perl scripts/tile.pl -h.
 
 =head1 Description
 
@@ -288,19 +290,19 @@ Parameters:
 
 =item o input_file => $str
 
-This parameter is mandatory.
+This parameter as a whole is mandatory.
 
 =item o geometry => $str
 
 This parameter is optional.
 
-It is format is 'NxM+x+y'.
+But, from V 2.00 on, no items within the geometry are optional.
+
+The format of $str is 'NxM+x+y'.
 
 N is the default number of tiles in the horizontal direction.
 
 M is the default number of tiles in the verical direction.
-
-From V 2.00 on, no items in the geometry are optional.
 
 Negative or positive values can be used for x and y. Negative values will probably cause extra tiles
 to be required to cover the image. That why I used the phrase 'default number of tiles' above.
@@ -338,10 +340,10 @@ This parameter is optional.
 
 It takes the values 0 and 1.
 
-This value causes tiles to be not written to disk.
+A value OF 0 stops tiles being written to disk.
 
 Setting it to 1 causes the tiles to be written to disk using the automatically generated files names
-as above.
+as discussed in L</tile()>.
 
 Default: 0.
 
@@ -353,7 +355,7 @@ Default: 0.
 
 After calling L</tile()>, this returns the number of tiles generated.
 
-=head2 input_file([str])
+=head2 input_file([$str])
 
 Here, [ and ] indicate an optional parameter.
 
@@ -361,7 +363,7 @@ Gets or sets the name of the input file.
 
 C<input_file> is a parameter to L</new()>. See L</Constructor and Initialization> for details.
 
-=head2 geometry([str])
+=head2 geometry([$str])
 
 Here, [ and ] indicate an optional parameter.
 
@@ -385,7 +387,7 @@ See above, in the section called 'Constructor and initialization'.
 
 Here, [ and ] indicate an optional parameter.
 
-Gets or sets the name of the input directory into which the tiles are written if C<new()> is called
+Gets or sets the name of the output directory into which the tiles are written if C<new()> is called
 as C<< new(write => 1) >> or if C<write()> is called as C<write(1)>.
 
 C<output_dir> is a parameter to L</new()>. See L</Constructor and Initialization> for details.
@@ -396,13 +398,15 @@ Here, [ and ] indicate an optional parameter.
 
 Gets or sets the type of tile image generated.
 
+$str takes values such as 'png', 'jpg', etc.
+
 C<output_type> is a parameter to L</new()>. See L</Constructor and Initialization> for details.
 
 =head2 tile()
 
-Chops up the input image and returns an array ref of tile details.
+Chops up the input image and returns an arrayref of tile details.
 
-Each element is a hashref, with these keys:
+Each element of this arrayref is a hashref with these keys:
 
 =over 4
 
@@ -411,7 +415,8 @@ Each element is a hashref, with these keys:
 This is an automatically generated file name.
 
 When the geometry is '2x3+0+0', say, the file names are of the form 1-1.png, 1-2.png, 2-1.png,
-2-2.png, 3-1.png and 3-2.png.
+2-2.png, 3-1.png and 3-2.png. Clearly, these are just the corresponding matrix subscripts of the
+tiles.
 
 See L</output_type([$str])> to change the output file type.
 
@@ -421,13 +426,25 @@ This is the Image::Magick object for one tile.
 
 =back
 
-=head2 verbose([$Boolean])
+=head2 verbose([$int])
 
 Here, [ and ] indicate an optional parameter.
 
 Gets or sets the option for how much information is printed to STDOUT.
 
+$int may take the values 0 .. 2.
+
 C<verbose> is a parameter to L</new()>. See L</Constructor and Initialization> for details.
+
+=head2 write([$Boolean])
+
+Here, [ and ] indicate an optional parameter.
+
+Gets or sets the option for whether or not the tiles are actaully written to disk.
+
+$Boolean takes the values 0 (do not write tiles) and 1 (write tiles).
+
+C<write> is a parameter to L</new()>. See L</Constructor and Initialization> for details.
 
 =head1 Repository
 

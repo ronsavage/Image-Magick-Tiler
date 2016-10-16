@@ -13,7 +13,7 @@ my($temp_dir)	= '/tmp';
 my($tiler)		= Image::Magick::Tiler -> new
 (
 	input_file	=> File::Spec -> catdir('t', 'sample.png'),
-	geometry	=> '2x2+6+0',
+	geometry	=> '3x4+5-6',
 	output_dir	=> $temp_dir,
 	output_type	=> 'png',
 	verbose		=> 2,
