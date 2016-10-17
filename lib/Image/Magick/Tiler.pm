@@ -250,7 +250,7 @@ This program ships as scripts/synopsis.pl:
 		print "Tile: @{[$i + 1]}. File name:   $$tiles[$i]{file_name}\n";
 	}
 
-This slices image.png into 3 tiles horizontally and 4 tiles vertically.
+This slices sample.png into 3 tiles horizontally and 4 tiles vertically.
 
 Further, the width of each tile is ( (width of sample.png) / 3) + 5 pixels,
 and the height of each tile is ( (height of sample.png) / 4) - 6 pixels.
