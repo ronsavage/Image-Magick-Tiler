@@ -26,7 +26,7 @@ my(%params) =
 	{
 		'File::Basename'	=> 0,
 		'File::Spec'		=> 0,
-		'Image::Magick'		=> 6.00,
+		'Image::Magick'		=> 0,
 		'Moo'				=> 2.002004,
 		'strict'			=> 0,
 		'Types::Standard'	=> 1.000005,
