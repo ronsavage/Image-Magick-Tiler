@@ -26,7 +26,7 @@ my(%params) =
 	{
 		'File::Basename'	=> 0,
 		'File::Spec'		=> 0,
-		'Image::Magick'		=> 0,
+		'Image::Magick'		=> 0, # Expect Module::Version's mversion to return undef.
 		'Moo'				=> 2.002004,
 		'strict'			=> 0,
 		'Types::Standard'	=> 1.000005,
